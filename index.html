@@ -23,6 +23,22 @@
             box-sizing: border-box;
             z-index: 1000;
         }
+
+        #fullscreen-prompt {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            padding-top: 50%;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -44,11 +60,15 @@
     <div id="orientation-warning">
         Please rotate your device to landscape mode.
     </div>
+    <div id="fullscreen-prompt">
+        Click to enter fullscreen mode.
+    </div>
     <script>
         var unityInstance = null;
         var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         var container = document.querySelector("#unity-container");
         var warningBanner = document.querySelector("#unity-warning");
+        var fullscreenPrompt = document.querySelector("#fullscreen-prompt");
 
         function unityShowBanner(msg, type) {
             function updateBannerVisibility() {
@@ -101,8 +121,12 @@
                         unityInstance.SetFullscreen(1);
                     };
                     if (!isMobile) {
-                        // Set fullscreen automatically for PC
-                        unityInstance.SetFullscreen(1);
+                        // Show fullscreen prompt for PC
+                        fullscreenPrompt.style.display = 'block';
+                        fullscreenPrompt.onclick = () => {
+                            unityInstance.SetFullscreen(1);
+                            fullscreenPrompt.style.display = 'none';
+                        };
                     }
                 }).catch((message) => {
                     alert(message);
@@ -126,7 +150,7 @@
                     }
                 }
             } else {
-                // For PC, always initialize Unity and set fullscreen
+                // For PC, always initialize Unity
                 document.getElementById('orientation-warning').style.display = 'none';
                 if (unityInstance === null) {
                     initializeUnity();
