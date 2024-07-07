@@ -19,9 +19,43 @@
             color: white;
             font-size: 24px;
             text-align: center;
-            padding-top: 50%;
+            padding-top: 50vh;
             box-sizing: border-box;
             z-index: 1000;
+        }
+        #unity-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #unity-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        #unity-loading-bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        #unity-warning {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+            background-color: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            display: none;
+        }
+        #unity-footer {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 2;
+            color: white;
         }
     </style>
 </head>
@@ -37,7 +71,7 @@
         <div id="unity-warning"></div>
         <div id="unity-footer">
             <div id="unity-webgl-logo"></div>
-            <button id="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
+            <button id="fullscreen-button">Fullscreen</button>
             <div id="unity-build-title">Central Interceptor</div>
         </div>
     </div>
@@ -48,6 +82,7 @@
         var container = document.querySelector("#unity-container");
         var canvas = document.querySelector("#unity-canvas");
         var warningBanner = document.querySelector("#unity-warning");
+        var fullscreenButton = document.querySelector("#fullscreen-button");
 
         function unityShowBanner(msg, type) {
             function updateBannerVisibility() {
@@ -56,9 +91,9 @@
             var div = document.createElement('div');
             div.innerHTML = msg;
             warningBanner.appendChild(div);
-            if (type == 'error') div.style = 'background: red; padding: 10px;';
+            if (type == 'error') div.style.background = 'red';
             else {
-                if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+                if (type == 'warning') div.style.background = 'yellow';
                 setTimeout(function() {
                     warningBanner.removeChild(div);
                     updateBannerVisibility();
@@ -77,23 +112,31 @@
             }
         }
 
+        if (fullscreenButton) {
+            fullscreenButton.onclick = toggleFullscreen;
+        }
+
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             var meta = document.createElement('meta');
             meta.name = 'viewport';
-            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+            meta.content = 'width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
             document.getElementsByTagName('head')[0].appendChild(meta);
             container.className = "unity-mobile";
         }
 
         // Adjust canvas size to fullscreen on request
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
 
         // Handle resizing the canvas when window resizes
         window.addEventListener('resize', function() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            resizeCanvas();
         });
+
+        // Initial resize
+        resizeCanvas();
     </script>
 </body>
 </html>
