@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="TemplateData/style.css">
     <script src="orientation.js"></script>
     <style>
+        /* Styling for orientation warning */
         #orientation-warning {
             display: none;
             position: absolute;
@@ -24,16 +25,19 @@
             z-index: 1000;
         }
 
-        /* Adjust container styles for desktop */
+        /* Container styles */
         #unity-container {
-            width: 100%; /* Occupy full width */
-            height: 100%; /* Occupy full height */
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Ensure canvas fills the container */
+        /* Canvas styles */
         #unity-canvas {
             width: 100%;
             height: 100%;
@@ -81,25 +85,66 @@
             updateBannerVisibility();
         }
 
-        // Ensure WebGL canvas occupies full size
-        function resizeCanvas() {
-            var canvas = document.getElementById('unity-canvas');
-            canvas.style.width = window.innerWidth + 'px';
-            canvas.style.height = window.innerHeight + 'px';
+        // Initialize Unity instance
+        function initializeUnity() {
+            var buildUrl = "Build";
+            var loaderUrl = buildUrl + "/water.loader.js";
+            var config = {
+                dataUrl: buildUrl + "/water.data",
+                frameworkUrl: buildUrl + "/water.framework.js",
+                codeUrl: buildUrl + "/water.wasm",
+                streamingAssetsUrl: "StreamingAssets",
+                companyName: "DefaultCompany",
+                productName: "Central Interceptor",
+                productVersion: "1.0",
+                showBanner: unityShowBanner,
+            };
+
+            var loadingBar = document.querySelector("#unity-loading-bar");
+            var progressBarFull = document.querySelector("#unity-progress-bar-full");
+
+            loadingBar.style.display = "block";
+
+            var script = document.createElement("script");
+            script.src = loaderUrl;
+            script.onload = function () {
+                createUnityInstance(document.getElementById('unity-canvas'), config, function (progress) {
+                    progressBarFull.style.width = 100 * progress + "%";
+                }).then(function (instance) {
+                    unityInstance = instance;
+                    loadingBar.style.display = "none";
+                    container.classList.add('loaded'); // Add 'loaded' class to show Unity content
+                    var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+                    fullscreenButton.onclick = function() {
+                        unityInstance.SetFullscreen(1);
+                    };
+                }).catch(function (message) {
+                    alert(message);
+                });
+            };
+
+            document.body.appendChild(script);
         }
 
-        // Check if the device is mobile and adjust viewport settings
-        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-            var meta = document.createElement('meta');
-            meta.name = 'viewport';
-            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-            document.getElementsByTagName('head')[0].appendChild(meta);
-            container.className = "unity-mobile";
-        } else {
-            // Resize canvas on desktop
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
+        // Check orientation and initial canvas size
+        function checkOrientation() {
+            var orientationWarning = document.getElementById('orientation-warning');
+            if (window.innerWidth > window.innerHeight) {
+                // Landscape orientation
+                orientationWarning.style.display = 'none';
+                initializeUnity(); // Initialize Unity when in landscape mode
+            } else {
+                // Portrait orientation
+                orientationWarning.style.display = 'block';
+            }
         }
+
+        // Event listeners
+        window.addEventListener('load', checkOrientation);
+        window.addEventListener('resize', checkOrientation);
+
+        // Initial check on page load
+        checkOrientation();
     </script>
 </body>
 </html>
