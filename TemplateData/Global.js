@@ -9,3 +9,4 @@ var warningBanner = document.querySelector("#unity-warning");
 var rpmHideButton = document.getElementById("rpm-hide-button");
 var canvasWrapper = document.getElementById("canvas-wrap");
 var unityGame;
+var partner;
