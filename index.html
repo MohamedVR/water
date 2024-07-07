@@ -23,11 +23,26 @@
             box-sizing: border-box;
             z-index: 1000;
         }
+
+        /* Adjust container styles for desktop */
+        #unity-container {
+            width: 100%; /* Occupy full width */
+            height: 100%; /* Occupy full height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Ensure canvas fills the container */
+        #unity-canvas {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
     <div id="unity-container" class="unity-desktop">
-        <canvas id="unity-canvas" width=960 height=600></canvas>
+        <canvas id="unity-canvas" width="960" height="600"></canvas>
         <div id="unity-loading-bar">
             <div id="unity-logo"></div>
             <div id="unity-progress-bar-empty">
@@ -66,12 +81,24 @@
             updateBannerVisibility();
         }
 
+        // Ensure WebGL canvas occupies full size
+        function resizeCanvas() {
+            var canvas = document.getElementById('unity-canvas');
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
+        }
+
+        // Check if the device is mobile and adjust viewport settings
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             var meta = document.createElement('meta');
             meta.name = 'viewport';
             meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
             document.getElementsByTagName('head')[0].appendChild(meta);
             container.className = "unity-mobile";
+        } else {
+            // Resize canvas on desktop
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
         }
     </script>
 </body>
