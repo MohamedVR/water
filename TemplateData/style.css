@@ -57,6 +57,11 @@ body {
     width: 0%; /* Adjust width dynamically as needed */
     height: 18px;
     background: url('progress-bar-full-dark.png') no-repeat center;
+    position: absolute; /* Position absolutely within the logo */
+    top: 50%; /* 10% from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, 0); /* Adjust vertical centering */
+    z-index: 102; /* Ensure it's above the loading bar */
 }
 
 #unity-footer {
