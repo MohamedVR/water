@@ -1,74 +1,79 @@
 body {
     padding: 0;
-    margin: 0
+    margin: 0;
+    overflow: hidden; /* Ensure no scrollbars appear */
 }
 
 #unity-container {
-    position: absolute
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
     #unity-container.unity-desktop {
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%)
+        transform: translate(-50%, -50%);
     }
 
     #unity-container.unity-mobile {
         width: 100%;
-        height: 100%
+        height: 100%;
     }
 
 #unity-canvas {
-    background: #231F20
+    background: #231F20;
 }
 
 .unity-mobile #unity-canvas {
     width: 100%;
-    height: 100%
+    height: 100%;
 }
 
 #unity-loading-bar {
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: none
+    top: 10%; /* Adjust this value to position the loading bar */
+    transform: translateX(-50%);
+    display: block; /* Ensure it is displayed */
 }
 
 #unity-logo {
-    width: 100%;
-    height: 100%;
-    background: url('unity-logo-dark.png') no-repeat center
+    position: absolute; /* Make it absolute to fill the screen */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('unity-logo-dark.png') no-repeat center;
+    background-size: cover; /* Ensure the logo covers the entire area */
+    z-index: -1; /* Ensure it is behind the loading bar */
 }
 
 #unity-progress-bar-empty {
     width: 141px;
     height: 18px;
-    margin-top: 10px;
-    margin-left: 6.5px;
-    background: url('progress-bar-empty-dark.png') no-repeat center
+    background: url('progress-bar-empty-dark.png') no-repeat center;
 }
 
 #unity-progress-bar-full {
     width: 0%;
     height: 18px;
-    margin-top: 10px;
-    background: url('progress-bar-full-dark.png') no-repeat center
+    background: url('progress-bar-full-dark.png') no-repeat center;
 }
 
 #unity-footer {
-    position: relative
+    position: relative;
 }
 
 .unity-mobile #unity-footer {
-    display: none
+    display: none;
 }
 
 #unity-webgl-logo {
     float: left;
     width: 100%;
     height: 100%;
-    background: url('webgl-logo.png') no-repeat center
+    background: url('webgl-logo.png') no-repeat center;
 }
 
 #unity-build-title {
@@ -76,14 +81,14 @@ body {
     margin-right: 10px;
     line-height: 38px;
     font-family: arial;
-    font-size: 18px
+    font-size: 18px;
 }
 
 #unity-fullscreen-button {
     float: right;
     width: 38px;
     height: 38px;
-    background: url('fullscreen-button.png') no-repeat center
+    background: url('fullscreen-button.png') no-repeat center;
 }
 
 #unity-warning {
@@ -93,5 +98,5 @@ body {
     transform: translate(-50%);
     background: white;
     padding: 10px;
-    display: none
+    display: none;
 }
