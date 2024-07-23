@@ -33,54 +33,33 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     display: none;
-    z-index: 100; /* Ensure this is above all other elements */
+    z-index: 100;
+    text-align: center; /* Center the contents */
 }
 
 #unity-logo {
-    width: 100vw; /* Set the width to 50% of its parent element's width */
-    height: 100vw; /* Set the height to 30% of its parent element's height */
-    z-index: -1;
+    width: 100vw; /* Full width of the viewport */
+    height: 100vw; /* Adjust height if necessary */
     background: url('unity-logo-dark.png') no-repeat center;
+    background-size: contain; /* Ensure the logo covers the entire area */
 }
 
 #unity-progress-bar-empty {
     width: 141px;
     height: 18px;
-    margin-top: 10px;
-    margin-left: 6.5px;
-    z-index: 101; /* Increase z-index to ensure it is above the loading bar */
+    margin: 0 auto; /* Center horizontally */
     background: url('progress-bar-empty-dark.png') no-repeat center;
+    position: absolute; /* Position absolutely within the logo */
+    top: 50%; /* 10% from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, 0); /* Adjust vertical centering */
+    z-index: 101; /* Ensure it's above the loading bar */
 }
 
 #unity-progress-bar-full {
-    width: 0%;
+    width: 0%; /* Adjust width dynamically as needed */
     height: 18px;
-    margin-top: 10px;
-    z-index: 102; /* Increase z-index to ensure it is above the empty progress bar */
     background: url('progress-bar-full-dark.png') no-repeat center;
-}
-
-#unity-footer {
-    position: relative;
-}
-
-.unity-mobile #unity-footer {
-    display: none;
-}
-
-#unity-webgl-logo {
-    float: left;
-    width: 204px;
-    height: 38px;
-    background: url('webgl-logo.png') no-repeat center;
-}
-
-#unity-build-title {
-    float: right;
-    margin-right: 10px;
-    line-height: 38px;
-    font-family: arial;
-    font-size: 18px;
 }
 
 #unity-fullscreen-button {
@@ -98,5 +77,16 @@ body {
     background: white;
     padding: 10px;
     display: none;
-    z-index: 200; /* Ensure the warning is above all other elements */
+    z-index: 200;
+}
+
+#orientation-warning {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 10px;
+    display: none;
+    z-index: 200;
 }
