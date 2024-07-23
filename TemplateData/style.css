@@ -44,9 +44,13 @@ body {
 #unity-progress-bar-empty {
     width: 141px;
     height: 18px;
-    margin-top: 10px;
-    margin-left: 6.5px;
-    background: url('progress-bar-empty-dark.png') no-repeat center
+    margin: 0 auto; /* Center horizontally */
+    background: url('progress-bar-empty-dark.png') no-repeat center;
+    position: absolute; /* Position absolutely within the logo */
+    top: 50%; /* 10% from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, 0); /* Adjust vertical centering */
+    z-index: 101; /* Ensure it's above the loading bar */
 }
 
 #unity-progress-bar-full {
