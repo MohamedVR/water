@@ -54,10 +54,9 @@ body {
 }
 
 #unity-progress-bar-full {
-    width: 0%;
+    width: 0%; /* Adjust width dynamically as needed */
     height: 18px;
-    margin-top: 10px;
-    background: url('progress-bar-full-dark.png') no-repeat center
+    background: url('progress-bar-full-dark.png') no-repeat center;
 }
 
 #unity-footer {
