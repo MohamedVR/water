@@ -36,9 +36,10 @@ body {
 }
 
 #unity-logo {
-    width: 154px;
-    height: 130px;
-    background: url('unity-logo-dark.png') no-repeat center
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure it is behind the loading bar */
+    background: url('unity-logo-dark.png') no-repeat center float: left;
 }
 
 #unity-progress-bar-empty {
@@ -66,9 +67,8 @@ body {
 
 #unity-webgl-logo {
     float: left;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Ensure it is behind the loading bar */
+    width: 204px;
+    height: 38px;
     background: url('webgl-logo.png') no-repeat center
 }
 
