@@ -44,24 +44,28 @@ body {
 #unity-progress-bar-empty {
     width: 141px;
     height: 18px;
-    margin: 0 auto; /* Center horizontally */
     background: url('progress-bar-empty-dark.png') no-repeat center;
     position: absolute; /* Position absolutely within the logo */
     top: 50%; /* 10% from the bottom */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, 0); /* Adjust vertical centering */
+    margin: 0 auto; /* Center horizontally */
+
     z-index: 101; /* Ensure it's above the loading bar */
 }
 
 #unity-progress-bar-full {
     width: 0%; /* Adjust width dynamically as needed */
     height: 18px;
-    background: url('progress-bar-full-dark.png') no-repeat center;
+
     position: absolute; /* Position absolutely within the logo */
     top: 50%; /* 10% from the bottom */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, 0); /* Adjust vertical centering */
-    z-index: 102; /* Ensure it's above the loading bar */
+    margin: 0 auto; /* Center horizontally */
+
+    z-index: 101; /* Ensure it's above the loading bar */
+    background: url('progress-bar-full-dark.png') no-repeat center;
 }
 
 #unity-footer {
