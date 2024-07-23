@@ -41,7 +41,6 @@ body {
     height: 100vw; /* Set the height to 30% of its parent element's height */
     z-index: -1;
     background: url('unity-logo-dark.png') no-repeat center;
-    background-size: cover; /* Ensure the logo covers the entire area */
 }
 
 #unity-progress-bar-empty {
