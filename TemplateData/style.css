@@ -46,11 +46,9 @@ body {
     height: 18px;
     background: url('progress-bar-empty-dark.png') no-repeat center;
     position: absolute; /* Position absolutely within the logo */
-    top: 50%; /* 10% from the bottom */
+    top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%); /* Adjust vertical centering */
-
-
     z-index: 101; /* Ensure it's above the loading bar */
 }
 
@@ -58,14 +56,13 @@ body {
     width: 0%; /* Adjust width dynamically as needed */
     height: 18px;
     position: absolute; /* Position absolutely within the logo */
-    top: 50%; 
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust vertical centering */
-
-
+    top: 50%; /* Center vertically */
+    left: 50%; /* Align to the left */
+    transform: translateY(-50%); /* Adjust vertical centering only */
     z-index: 101; /* Ensure it's above the loading bar */
     background: url('progress-bar-full-dark.png') no-repeat center;
 }
+
 
 #unity-footer {
     position: relative
