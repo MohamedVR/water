@@ -37,8 +37,8 @@ body {
 }
 
 #unity-logo {
-    width: 50%; /* Set the width to 50% of its parent element's width */
-    height: 30%; /* Set the height to 30% of its parent element's height */
+    width: 50vw; /* Set the width to 50% of its parent element's width */
+    height: 30vw; /* Set the height to 30% of its parent element's height */
     z-index: -1;
     background: url('unity-logo-dark.png') no-repeat center;
     background-size: cover; /* Ensure the logo covers the entire area */
