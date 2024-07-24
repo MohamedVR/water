@@ -52,11 +52,7 @@ body {
     height: 18px;
     background: url('progress-bar-empty-dark.png') no-repeat center;
     position: absolute; /* Position absolutely within the logo */
-<<<<<<< HEAD
     top: 85%; /* Center vertically within the parent */
-=======
-    top: 50%; /* Center vertically within the parent */
->>>>>>> be9d03e3eaa46ef130648552537b84a5f367cfe6
     left: 50%; /* Center horizontally within the parent */
     transform: translate(-50%, -50%); /* Adjust vertical and horizontal centering */
     z-index: 101; /* Ensure it's above the loading bar */
